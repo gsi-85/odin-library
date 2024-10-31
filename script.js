@@ -102,6 +102,14 @@ const jsCloseBtn = dialog.querySelector("#js-close");
 
 showBtn.addEventListener("click", () => {
   dialog.showModal();
+  const titleid = document.querySelector("#title");
+  const authorid = document.querySelector("#author");
+  const pagesid = document.querySelector("#pages");
+  const readid = document.querySelector("#read");
+  titleid.value = null
+  authorid.value = null
+  pagesid.value = null
+  readid.value = false
 });
 
 jsCloseBtn.addEventListener("click", (e) => {
