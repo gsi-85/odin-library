@@ -20,10 +20,18 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary() {
   // do stuff here
-  const title = prompt("Book:");
-  const author = prompt("Author");
-  const pages = prompt("Pages:");
-  const read = prompt("Read:");
+  const titleid = document.querySelector("#title");
+  const authorid = document.querySelector("#author");
+  const pagesid = document.querySelector("#pages");
+  const readid = document.querySelector("#read");
+//  const title = prompt("Book:");
+//  const author = prompt("Author");
+//  const pages = prompt("Pages:");
+//  const read = prompt("Read:");
+  const title = titleid.value;
+  const author = authorid.value;
+  const pages = pagesid.value;
+  const read = readid.value;
   const addBook = new Book(title, author, pages, read);
   return myLibrary.push(addBook);
 }
@@ -86,9 +94,26 @@ myLibrary.push(sampletwo);
 const table = document.querySelector("tbody");
 //addBookToLibrary();
 displayTableFromArray(myLibrary);
-const btn = document.querySelector(".btn");
-btn.addEventListener("click", addToTable);
 
-console.log(table);
+
+const showBtn = document.getElementById("show-dialog");
+const dialog = document.getElementById("dialog");
+const jsCloseBtn = dialog.querySelector("#js-close");
+
+showBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+jsCloseBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  dialog.close();
+});
+
+const submit = document.querySelector("#normal-close");
+submit.addEventListener("click", submitClick);
+
+function submitClick(event) {
+  return addBookToLibrary(), emptyTable(), displayTableFromArray(myLibrary);
+}
 
 

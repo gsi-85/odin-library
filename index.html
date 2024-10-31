@@ -7,7 +7,42 @@
 </head>
 <body>
     <h1>Book Libary</h1>
-    <button class="btn">Add new Book</button>
+    <dialog id="dialog">
+        <form method="dialog">
+          <p>
+            <label>
+              Title:
+              <input id="title" type="text" required />
+            </label>
+          </p>
+          <p>
+            <label>
+              Author:
+              <input id="author" type="text" required />
+            </label>
+          </p>
+          <p>
+            <label>
+              Pages:
+              <input id="pages" type="number" required />
+            </label>
+          </p>
+          <p>
+            <label>
+              Read?:
+              <input id="read" type="checkbox" required />
+            </label>
+          </p>
+          <div>
+            <input type="submit" id="normal-close" value="Normal close" />
+            <input type="submit" id="js-close" value="JS close" />
+          </div>
+        </form>
+      </dialog>
+      <p>
+        <button id="show-dialog">Add New Book</button>
+      </p>
+      <output></output>
     <table class="main">
         <tr>
             <th>title</th>
@@ -18,4 +53,16 @@
     </table>
 </body>
 <script src="script.js"></script>
+<style>
+    ::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
+}
+</style>
 </html>
