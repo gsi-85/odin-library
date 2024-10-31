@@ -6,9 +6,14 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.read = false;
   this.info = function () {
       return title + " by " + author + ", " + pages + " pages, " + read;
+  }
+  this.toggle = function () {
+      console.log("before" + this.read)
+      this.read = !this.read;
+      console.log("after" + this.read)
   }
 }
 
@@ -24,13 +29,20 @@ function addBookToLibrary() {
 }
 
 function displayTableFromArray(array) {
-  array.forEach(element => {
+  array.forEach((element, index ) => {
     const row = document.createElement("tr");
     row.setAttribute("class", "test");
     const titletable = document.createElement("th");
     const authortable = document.createElement("th");
     const pagestable = document.createElement("th");
     const readtable = document.createElement("th");
+    const actionButton = document.createElement("td");
+    const removeButton = document.createElement("button");
+    const toggleButton = document.createElement("button");
+    removeButton.textContent = 'Remove';
+    removeButton.onclick = function() { removeEntry(index); };
+    toggleButton.textContent = 'Toggle';
+    toggleButton.onclick = function() { toggleFunc(index)}; ;
     titletable.textContent = element.title;
     authortable.textContent = element.author;
     pagestable.textContent = element.pages;
@@ -39,8 +51,17 @@ function displayTableFromArray(array) {
     row.appendChild(authortable);
     row.appendChild(pagestable);
     row.appendChild(readtable);
+    actionButton.appendChild(removeButton);
+    actionButton.appendChild(toggleButton);
+    row.appendChild(actionButton);
     table.appendChild(row);
   });
+}
+function emptyTable() {
+  let tbody = document.querySelectorAll('.test');
+  tbody.forEach(element => {
+    element.remove();
+  })
 }
 function addToTable() {
     let tbody = document.querySelectorAll('.test');
@@ -48,6 +69,15 @@ function addToTable() {
       element.remove();
     })
     return addBookToLibrary(), displayTableFromArray(myLibrary);
+}
+function removeEntry(index) {
+  emptyTable();
+  myLibrary.splice(index, 1);
+  displayTableFromArray(myLibrary);
+}
+function toggleFunc(index) {
+  myLibrary[index].toggle();
+  return emptyTable(), displayTableFromArray(myLibrary);
 }
 const sampleone = new Book("title1", "author1", "pages1", "yes");
 const sampletwo = new Book("title2", "author2", "pages2", "no");
