@@ -26,6 +26,7 @@ function addBookToLibrary() {
 function displayTableFromArray(array) {
   array.forEach(element => {
     const row = document.createElement("tr");
+    row.setAttribute("class", "test");
     const titletable = document.createElement("th");
     const authortable = document.createElement("th");
     const pagestable = document.createElement("th");
@@ -41,13 +42,22 @@ function displayTableFromArray(array) {
     table.appendChild(row);
   });
 }
+function addToTable() {
+    let tbody = document.querySelectorAll('.test');
+    tbody.forEach(element => {
+      element.remove();
+    })
+    return addBookToLibrary(), displayTableFromArray(myLibrary);
+}
 const sampleone = new Book("title1", "author1", "pages1", "yes");
 const sampletwo = new Book("title2", "author2", "pages2", "no");
 myLibrary.push(sampleone);
 myLibrary.push(sampletwo);
 const table = document.querySelector("tbody");
-addBookToLibrary();
+//addBookToLibrary();
 displayTableFromArray(myLibrary);
+const btn = document.querySelector(".btn");
+btn.addEventListener("click", addToTable);
 
 console.log(table);
 
